@@ -1,0 +1,420 @@
+/* ========================================
+   APEX.CSS — consolidated, bug-fixed, accessible
+   Replaces and improves your original stylesheet.
+   ======================================== */
+
+:root{
+  --bg-base: #1e1e2f;
+  --bg-surface: #2a2a40;
+  --text-main: #f8fafc;
+  --text-muted: #cbd5e1;
+  --accent-color: #8b5cf6;
+  --accent-hover: #a78bfa;
+  --shadow-strong: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+/* ---------- resets ---------- */
+*,
+*::before,
+*::after{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body{
+  background: var(--bg-base);
+  color: var(--text-main);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* accessible focus outlines */
+:focus {
+  outline: 3px solid rgba(167,139,250,0.18);
+  outline-offset: 2px;
+}
+
+/* ---------- NAVIGATION (single consolidated rule) ---------- */
+nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 5%;
+  gap: 1rem;
+  background-color: var(--bg-surface);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  position: relative;
+  z-index: 1000;
+}
+
+/* logo */
+.logo{
+  color: var(--accent-color);
+  font-weight: 700;
+  font-size: 1.4rem;
+  text-decoration: none;
+  display: inline-block;
+  letter-spacing: 0.4px;
+}
+
+/* fallback nav-links (kept for future use) */
+.nav-links{
+  list-style: none;
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+.nav-links a{
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 500;
+}
+.nav-links a:hover,
+.nav-links a:focus{
+  color: var(--accent-hover);
+}
+
+/* ---------- DROPDOWN (works without JavaScript) ---------- */
+.dropdown{
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn{
+  background: transparent;
+  border: 1px solid var(--accent-color);
+  color: var(--text-main);
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  text-decoration: none;
+}
+
+/* dropdown content hidden by default; revealed on hover or focus-within */
+.dropdown-content{
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.5rem);
+  min-width: 180px;
+  background: var(--bg-surface);
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  padding: 0.4rem 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* show dropdown when hovering or keyboard focusing */
+.dropdown:hover .dropdown-content,
+.dropdown:focus-within .dropdown-content{
+  display: block;
+}
+
+.dropdown-content a{
+  display: block;
+  padding: 0.6rem 1rem;
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 0.98rem;
+}
+.dropdown-content a:hover,
+.dropdown-content a:focus{
+  background: rgba(139,92,246,0.08);
+  color: var(--accent-hover);
+}
+
+/* Ensure the dropdown is usable on small screens by preventing overflow */
+@media (max-width: 420px){
+  .dropdown-content {
+    right: auto;
+    left: 0;
+    min-width: calc(100vw - 2rem);
+  }
+}
+
+/* ---------- HERO / HOME ---------- */
+.hero-section{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 4.5% 6%;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.hero-text{
+  flex: 1 1 360px;
+  max-width: 720px;
+}
+
+.hero-text h1{
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+  color: var(--text-main);
+}
+
+.hero-text h1 span{
+  color: var(--accent-color);
+}
+
+.hero-text p{
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  margin-bottom: 1.5rem;
+  max-width: 60ch;
+}
+
+/* hero image */
+.hero-image{
+  flex: 1 1 320px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hero-image img{
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: var(--shadow-strong);
+  display: block;
+}
+
+/* ---------- ABOUT / CARDS ---------- */
+.about-section{
+  padding: 5% 6%;
+  flex: 1;
+}
+
+.about-section h1{
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 2.5rem;
+  color: var(--accent-color);
+}
+
+.card-container{
+  display: flex;
+  gap: 1.25rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* make cards flexible and avoid overflow on small screens */
+.card{
+  background-color: var(--bg-surface);
+  padding: 1.6rem;
+  border-radius: 10px;
+  flex: 1 1 220px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform .25s ease, box-shadow .25s ease;
+  min-width: 200px;
+}
+
+.card:hover,
+.card:focus-within{
+  transform: translateY(-6px);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.28);
+}
+
+.card h3{
+  color: var(--accent-hover);
+  margin-bottom: 0.8rem;
+  font-size: 1.05rem;
+}
+
+/* ---------- CONTACT ---------- */
+.contact-section{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5% 6%;
+  text-align: center;
+}
+
+.contact-section h1{
+  font-size: 2.4rem;
+  margin-bottom: 0.8rem;
+  color: var(--accent-color);
+}
+
+.contact-section p{
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+  font-size: 1.05rem;
+  max-width: 60ch;
+}
+
+/* contact methods list */
+.contact-methods{
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0;
+  margin: 0.5rem 0 0;
+}
+
+.contact-methods a{
+  display: inline-block;
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+  text-decoration: none;
+  padding: 0.85rem 1.4rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  border: 1px solid transparent;
+  transition: background .2s ease, color .2s ease, transform .08s ease;
+  border: 1px solid rgba(139,92,246,0.12);
+}
+
+.contact-methods a:hover,
+.contact-methods a:focus{
+  background-color: var(--accent-color);
+  color: var(--bg-base);
+  transform: translateY(-2px);
+}
+
+/* ---------- TOP-HEADING (present in some pages) ---------- */
+.top-heading{
+  text-align: center;
+  color: var(--accent-hover);
+  font-size: 1.25rem;
+  margin: 1.25rem 0;
+  font-weight: 600;
+}
+
+/* ---------- FOOTER ---------- */
+footer{
+  margin-top: auto;
+  padding: 1.25rem 6%;
+  background: var(--bg-surface);
+  text-align: center;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.18);
+}
+
+.footer-links{
+  list-style: none;
+  display: inline-flex;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-links a{
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.98rem;
+}
+.footer-links a:hover,
+.footer-links a:focus{
+  color: var(--accent-hover);
+}
+
+/* small visual details for anchors and buttons */
+a, button{
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---------- RESPONSIVE ADJUSTMENTS ---------- */
+@media screen and (max-width: 768px){
+  nav{
+    flex-direction: column;
+    align-items: stretch;
+    gap: .6rem;
+    padding: 1rem 4%;
+  }
+
+  /* make the logo and dropdown align comfortably on mobile */
+  .logo{
+    align-self: start;
+    margin-bottom: 0.25rem;
+  }
+
+  .dropdown{
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
+  }
+  .dropbtn{
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-section{
+    padding: 4% 4%;
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-image{
+    justify-content: center;
+  }
+
+  .card-container{
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media screen and (max-width: 420px){
+  .hero-text h1{
+    font-size: 1.6rem;
+  }
+  .hero-text p{
+    font-size: 0.98rem;
+  }
+}
+.dropbtn {
+  /* make the original text invisible visually but keep it in the DOM for assistive tech */
+  font-size: 0;
+  line-height: 0;
+  background: transparent;
+  border: 1px solid var(--accent-color);
+  color: var(--text-main);
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* draw the clean label back using a pseudo-element (no triangle). */
+.dropbtn::before {
+  content: "Explore Menu";   /* visual label only */
+  font-size: 1rem;          /* restore readable size */
+  line-height: normal;
+  color: inherit;
+  font-weight: 600;
+  pointer-events: none;
+  display: inline-block;
+}
+
+/* optional: small hover/focus styling */
+.dropbtn:hover::before,
+.dropbtn:focus::before {
+  color: var(--accent-hover);
+}
