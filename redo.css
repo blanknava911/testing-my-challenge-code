@@ -84,7 +84,7 @@ nav{
   color: var(--accent-hover);
 }
 
-/* ---------- DROPDOWN (works without JavaScript) ---------- */
+/* DROPDOWN */
 .dropdown{
   position: relative;
   display: inline-block;
@@ -189,7 +189,7 @@ nav{
 }
 
 .hero-image img{
-  max-width: 100%;
+  max-width: 80%;
   height: auto;
   border-radius: 12px;
   box-shadow: var(--shadow-strong);
@@ -385,36 +385,5 @@ a, button{
     font-size: 0.98rem;
   }
 }
-.dropbtn {
-  /* make the original text invisible visually but keep it in the DOM for assistive tech */
-  font-size: 0;
-  line-height: 0;
-  background: transparent;
-  border: 1px solid var(--accent-color);
-  color: var(--text-main);
-  padding: 0.5rem 0.9rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
 
-/* draw the clean label back using a pseudo-element (no triangle). */
-.dropbtn::before {
-  content: "Explore Menu";   /* visual label only */
-  font-size: 1rem;          /* restore readable size */
-  line-height: normal;
-  color: inherit;
-  font-weight: 600;
-  pointer-events: none;
-  display: inline-block;
-}
 
-/* optional: small hover/focus styling */
-.dropbtn:hover::before,
-.dropbtn:focus::before {
-  color: var(--accent-hover);
-}
